@@ -4,11 +4,9 @@ package input;
 import java.io.File;
 
 import data.Agent;
-import data.Coat;
+import data.Kind;
 import data.Receipt;
-import data.Shirt;
-import data.Skirt;
-import data.Trouser;
+
 
 public abstract class Input {
 	
@@ -19,7 +17,11 @@ public abstract class Input {
 	protected String afm;
 	protected int receiptID;
 	protected String date;
-	protected String kind;
+	protected String shirt ;
+	protected String skirt;
+	protected String trousers;
+	protected String coat ;
+	protected Kind kind ;
 	protected double sales;
 	protected int items;
 	protected String companyName;
@@ -33,7 +35,7 @@ public abstract class Input {
 	
 	public Input() {
 		agent = new Agent();
-		kind  = new String("");
+		kind  = new Kind();
 	}
 	
 
@@ -44,21 +46,21 @@ public abstract class Input {
 	}
 	
 	public void addReceipt( ){
-		Receipt receipt;			
+		Receipt receipt = null;			
 			if(kind.equals("Shirts")) {
-				receipt= new Shirt();
+				receipt.getKind().setShirt(shirt);
 
 			}
 			else if (kind.equals("Skirts")) {
-				receipt = new Skirt();
+				receipt.getKind().setSkirt(skirt);
 
 			}
 			else if (kind.equals("Trousers")) {
-				receipt = new Trouser();
+				receipt.getKind().setTrousers(trousers);
 
 			}
 			else {
-				receipt = new Coat();
+				receipt.getKind().setCoat(coat);
 			}
 			
 			receipt.setReceiptID(receiptID);			
