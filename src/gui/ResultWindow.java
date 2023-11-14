@@ -235,14 +235,14 @@ public class ResultWindow extends JDialog {
 	private void outputTXTButtonPressed(ActionEvent evt) {
 		TXTReport makeTXTFile = new TXTReport(selectedAgent);
 		makeTXTFile.saveFile();
-		JOptionPane.showMessageDialog(null,"Η αναφορά αποθηκεύτηκε επιτυχώς");
+		JOptionPane.showMessageDialog(null,"result window 1");
 
 		
 	}
 	private void outputXMLButtonPressed(ActionEvent evt) {
 		XMLReport makeXMLFile = new XMLReport(selectedAgent);
 		makeXMLFile.saveFile();
-		JOptionPane.showMessageDialog(null,"Η αναφορά αποθηκεύτηκε επιτυχώς");		
+		JOptionPane.showMessageDialog(null,"result window 2");		
 	}
 	private void okButtonPressed(ActionEvent evt) {
 		System.exit(0);		

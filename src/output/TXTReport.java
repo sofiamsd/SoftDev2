@@ -54,7 +54,7 @@ public class TXTReport extends Report{
 
 
         }catch (IOException ex){
-			JOptionPane.showMessageDialog(null,"Υπήρξε κάποιο πρόβλημα κατά την αποθήκευση του αρχείου");
+			JOptionPane.showMessageDialog(null,"txt report");
 
         }
 		

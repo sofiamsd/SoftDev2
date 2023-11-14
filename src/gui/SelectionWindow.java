@@ -2,6 +2,7 @@ package gui;
 
 
 import javax.swing.JButton;
+
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -21,11 +22,11 @@ import java.awt.SystemColor;
 import java.awt.Color;
 
 import data.Agent;
-import data.Coat;
 import data.Receipt;
-import data.Shirt;
-import data.Skirt;
-import data.Trouser;
+//import data.Shirt;
+//import data.Skirt;
+//import data.Trouser;
+//import data.Coat;
 
 
 public class SelectionWindow extends JDialog {
@@ -386,7 +387,7 @@ public class SelectionWindow extends JDialog {
 			agentNameTextField.setText(selectedAgent.getName());
 		}catch(NullPointerException e){
 			
-			JOptionPane.showMessageDialog(null,"Προέκυψε κάποιο πρόβλημα, προσπαθήστε ξανά");
+			JOptionPane.showMessageDialog(null,"selection window 1");
 
 		}
 		
@@ -442,18 +443,10 @@ public class SelectionWindow extends JDialog {
 				&& itemsTextField.getText().isEmpty() && companyTextField.getText().isEmpty()
 				&& countryTextField.getText().isEmpty() && cityTextField.getText().isEmpty()
 				&& streetTextField.getText().isEmpty() && numberTextField.getText().isEmpty()){
-			JOptionPane.showMessageDialog(null,"Πρέπει να συμπληρώσετε όλα τα πεδία");
+			JOptionPane.showMessageDialog(null,"selection window 2");
 			
 		}
-		/*else if(kindTextField.toString().equalsIgnoreCase("Coats") == false && 
-				kindTextField.toString().equalsIgnoreCase("Shirts") == false &&
-				kindTextField.toString().equalsIgnoreCase("Skirts") == false &&
-				kindTextField.toString().equalsIgnoreCase("Trousers") == false){
-			JOptionPane.showMessageDialog(null,"To είδος που πρηκτολογήσατε δεν έιναι έγκυρο. Προσπαθήστε"
-					+ " ξανά συμπληρώνοντας το πεδίο kind Coats ή Shirts ή Skirts ή Trousers");
 
-		}*/
-			
 		else{
 			
 			addReceipt();
@@ -491,14 +484,14 @@ public class SelectionWindow extends JDialog {
 		Receipt receipt = new Receipt();
 		
 		
-		if(kindTextField.equals("Shirts"))		
-			receipt= new Shirt();
+		if(kindTextField.equals("Shirts"))	
+			receipt.getKind().setShirt(fileType); //TODO : is this right ?
 		else if (kindTextField.equals("Skirts"))
-			receipt = new Skirt();
+			receipt = new Receipt();
 		else if (kindTextField.equals("Trousers"))
-			receipt = new Trouser();
+			receipt = new Receipt();
 		else if(kindTextField.equals("Coats"))				
-			receipt = new Coat();
+			receipt = new Receipt();
 		try{
 			receipt.setReceiptID(Integer.parseInt(receiptIDTextField.getText()));			
 			receipt.setDate(dateTextField.getText());
@@ -512,10 +505,10 @@ public class SelectionWindow extends JDialog {
 			selectedAgent.getReceipts().add(receipt);
 			numOfReceipts++;
 			numOfReceiptsTextField.setText(Integer.toString(numOfReceipts));
-			JOptionPane.showMessageDialog(null,"Η απόδειξη προσθέθηκε επιτυχώς");
+			JOptionPane.showMessageDialog(null,"selection window 3");
 
 		}catch (NumberFormatException e){
-			JOptionPane.showMessageDialog(null,"Δεν συμπληρώσατε σωστά κάποιο πεδίο, προσπαθήστε ξανά");
+			JOptionPane.showMessageDialog(null,"selection window 4");
 
 		}
 	}

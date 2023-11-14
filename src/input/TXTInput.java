@@ -1,6 +1,7 @@
  package input;
 
 import java.io.BufferedReader;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -58,10 +59,29 @@ public class TXTInput extends Input{
 					continue;
 				}
 							
-				if(line.startsWith("Kind")){
+				if(line.startsWith("Coat")){
 								
-					kind = (line.substring(line.indexOf(":") + 1).trim());
-					continue;
+					coat = (line.substring
+							(line.indexOf(":") + 1).trim());
+							continue;
+				}
+				if(line.startsWith("Skirt")){
+					
+					skirt = (line.substring
+							(line.indexOf(":") + 1).trim());
+							continue;
+				}
+				if(line.startsWith("Shirt")){
+					
+					shirt = (line.substring
+							(line.indexOf(":") + 1).trim());
+							continue;
+				}
+				if(line.startsWith("Trousers")){
+					
+					trousers = (line.substring
+							(line.indexOf(":") + 1).trim());
+							continue;
 				}
 						
 				if(line.startsWith("Sales")){

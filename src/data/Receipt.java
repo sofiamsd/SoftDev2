@@ -6,12 +6,12 @@ public class Receipt {
 	protected double sales;
 	protected int items;
 	protected Company company;
-	protected String kind;
+	protected Kind kind;
 		
 	
 	public Receipt(){
 		
-		kind = new String("No specific kind");
+		kind = new Kind();
 		company  = new Company();
 	}
 	
@@ -20,7 +20,7 @@ public class Receipt {
 		return company;
 	}
 
-	public String getKind() {
+	public Kind getKind() {
 		return kind;
 		
 	}

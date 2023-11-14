@@ -44,9 +44,18 @@ public class XMLInput extends Input {
             	date = ((Element) receiptsNodeList.item(i)).
 				getElementsByTagName("Date").item(0).getChildNodes().item(0).getNodeValue().trim();
 				
-            	kind = ((Element) receiptsNodeList.item(i))
-				.getElementsByTagName("Kind").item(0).getChildNodes().item(0).getNodeValue().trim();
-				
+            	coat = ((Element) receiptsNodeList.item(i))
+				.getElementsByTagName("Coat").item(0).getChildNodes().item(0).getNodeValue().trim();
+            	
+            	shirt = ((Element) receiptsNodeList.item(i))
+        		.getElementsByTagName("Shirt").item(0).getChildNodes().item(0).getNodeValue().trim();
+            	
+            	skirt = ((Element) receiptsNodeList.item(i))
+        		.getElementsByTagName("Skirt").item(0).getChildNodes().item(0).getNodeValue().trim();
+            	
+            	trousers = ((Element) receiptsNodeList.item(i))
+        		.getElementsByTagName("Trousers").item(0).getChildNodes().item(0).getNodeValue().trim();
+            		
             	sales = Double.parseDouble(((Element) receiptsNodeList.item(i)).
 				getElementsByTagName("Sales").item(0).getChildNodes().item(0).getNodeValue().trim());
             	
@@ -77,7 +86,7 @@ public class XMLInput extends Input {
             
         } catch (Exception e) {
         	JOptionPane.showMessageDialog
-			(null,"Προέκυψε κάποιο πρόβλημα κατά το διάβασμα του αρχείου");
+			(null,"xml input");
 		} 
     }
     

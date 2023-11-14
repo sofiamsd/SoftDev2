@@ -213,7 +213,7 @@ public class InputWindow extends JDialog {
 				}
 			}
 			if(agentDuplicate == true){
-				JOptionPane.showMessageDialog(null,"Ο αντιπρόσωπος υπάρχει ήδη στη λίστα");
+				JOptionPane.showMessageDialog(null,"input window 1");
 
 			}
 			else{
@@ -224,10 +224,10 @@ public class InputWindow extends JDialog {
 			
 		}catch (NullPointerException e){
 			
-			JOptionPane.showMessageDialog(null,"Δεν επιλέχθηκε κανένα αρχείο");
+			JOptionPane.showMessageDialog(null,"input window 2");
 
 		}catch (NumberFormatException e){
-			JOptionPane.showMessageDialog(null,"Προέκυψε κάποιο πρόβλημα κατά την ανάγνωση του αρχείου");
+			JOptionPane.showMessageDialog(null,"input window 3");
 		}
 		
 	}
@@ -253,7 +253,7 @@ public class InputWindow extends JDialog {
 				}
 			}
 			if(agentDuplicate == true){
-				JOptionPane.showMessageDialog(null,"Ο αντιπρόσωπος υπάρχει ήδη στη λίστα");
+				JOptionPane.showMessageDialog(null,"input window 4");
 
 			}
 			else{
@@ -263,7 +263,7 @@ public class InputWindow extends JDialog {
 			}
 		}catch (IllegalArgumentException e){
 		
-			JOptionPane.showMessageDialog(null,"Δεν επιλέχθηκε κανένα αρχείο");
+			JOptionPane.showMessageDialog(null,"input window 5");
 
 		}
         
@@ -291,7 +291,7 @@ public class InputWindow extends JDialog {
 	
 	private void okButtonPressed(ActionEvent evt) {
 		if(agentsList.isSelectionEmpty()){
-			JOptionPane.showMessageDialog(null,"Δεν έχετε επιλέξει αντιπρόσωπο");
+			JOptionPane.showMessageDialog(null,"input window 6");
 
 		}
 		else{
