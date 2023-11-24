@@ -3,25 +3,22 @@ package input;
 
 import java.io.File;
 
-import data.Agent;
+
+import data.Salesman;
 import data.Kind;
 import data.Receipt;
 
-
 public abstract class Input {
 	
-	protected Agent agent;
+	protected Salesman agent;
 	protected File inputFile;
 	protected String inputFilePath;
 	protected String name;
 	protected String afm;
 	protected int receiptID;
 	protected String date;
-	protected String shirt ;
-	protected String skirt;
-	protected String trousers;
-	protected String coat ;
-	protected Kind kind ;
+	protected Kind kind;
+	protected String clothingType;
 	protected double sales;
 	protected int items;
 	protected String companyName;
@@ -34,8 +31,10 @@ public abstract class Input {
 
 	
 	public Input() {
-		agent = new Agent();
-		kind  = new Kind();
+		agent = new Salesman();
+		kind = new Kind("");
+		
+
 	}
 	
 
@@ -46,35 +45,35 @@ public abstract class Input {
 	}
 	
 	public void addReceipt( ){
-		Receipt receipt = null;			
-			if(kind.equals("Shirts")) {
-				receipt.getKind().setShirt(shirt);
+		Receipt receipt = new Receipt();			
+		if(kind.equals("Shirts")) {
+			receipt.getKind().setType("Shirts");
 
-			}
-			else if (kind.equals("Skirts")) {
-				receipt.getKind().setSkirt(skirt);
+		}
+		else if (kind.equals("Skirts")) {
+			receipt.getKind().setType("Skirts");
 
-			}
-			else if (kind.equals("Trousers")) {
-				receipt.getKind().setTrousers(trousers);
+		}
+		else if (kind.equals("Trousers")) {
+			receipt.getKind().setType("Trousers");
 
-			}
-			else {
-				receipt.getKind().setCoat(coat);
-			}
-			
-			receipt.setReceiptID(receiptID);			
-			receipt.setDate(date);
-			receipt.setSales(sales);
-			receipt.setItems(items);
-			receipt.getCompany().setName(companyName);
-			receipt.getCompany().getCompanyAddress().setCountry(companyCountry);
-			receipt.getCompany().getCompanyAddress().setCity(companyCity);
-			receipt.getCompany().getCompanyAddress().setStreet(companyStreet);
-			receipt.getCompany().getCompanyAddress().setStreetNumber(companyStreetNumber);
-			agent.getReceipts().add(receipt);
+		}
+		else {
+			receipt.getKind().setType("Coats");
+		}
+		
+		receipt.setReceiptID(receiptID);			
+		receipt.setDate(date);
+		receipt.setSales(sales);
+		receipt.setItems(items);
+		receipt.getCompany().setName(companyName);
+		receipt.getCompany().getCompanyAddress().setCountry(companyCountry);
+		receipt.getCompany().getCompanyAddress().setCity(companyCity);
+		receipt.getCompany().getCompanyAddress().setStreet(companyStreet);
+		receipt.getCompany().getCompanyAddress().setStreetNumber(companyStreetNumber);
+		agent.getReceipts().add(receipt);
 	}
-	public Agent getAgent() {
+	public Salesman getAgent() {
 		return agent;
 	}
 

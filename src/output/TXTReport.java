@@ -7,13 +7,13 @@ import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
-import data.Agent;
+import data.Salesman;
 
 
 public class TXTReport extends Report{
 
 	
-	public TXTReport(Agent a){
+	public TXTReport(Salesman a){
 		agent = a;
 	}
 	

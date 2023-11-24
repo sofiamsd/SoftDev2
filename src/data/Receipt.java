@@ -1,5 +1,7 @@
 package data;
 
+
+
 public class Receipt {
 	protected int receiptId;
 	protected String date;
@@ -7,30 +9,44 @@ public class Receipt {
 	protected int items;
 	protected Company company;
 	protected Kind kind;
+	
 		
 	
 	public Receipt(){
-		
-		kind = new Kind();
 		company  = new Company();
+		kind = new Kind("");
 	}
 	
+
+
 	public Company getCompany(){
 		
 		return company;
 	}
 
+	
 	public Kind getKind() {
 		return kind;
-		
 	}
+	 
 
 	
 	public double getSales() {
 		return sales;
 	}
 
-	
+	public Receipt(int receiptId, String date, double sales, int items, Company company, Kind kind) {
+		super();
+		this.receiptId = receiptId;
+		this.date = date;
+		this.sales = sales;
+		this.items = items;
+		this.company = company;
+		this.kind = kind;
+	}
+
+
+
 	public void setSales(double sales) {
 
 		this.sales = sales;

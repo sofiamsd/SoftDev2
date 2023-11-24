@@ -1,15 +1,12 @@
 package input;
 
-import java.io.BufferedReader;
 import java.io.File;
 
-public class HTMLInput extends Input {
+public class HTMLInput extends XMLInput {
 
-	@Override
-	public void readFile() {
-		// TODO Auto-generated method stub
-		
+	public HTMLInput(File receiptFileXML) {
+		super(receiptFileXML);
+		// TODO Auto-generated constructor stub
 	}
-	
 
 }

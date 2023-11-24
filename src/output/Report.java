@@ -1,10 +1,10 @@
 package output;
 
-import data.Agent;
+import data.Salesman;
 
 public abstract class Report {
 
-	protected Agent agent;
+	protected Salesman agent;
 	
 	public abstract void saveFile();
 }

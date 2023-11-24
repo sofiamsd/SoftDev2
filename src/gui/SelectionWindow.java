@@ -21,12 +21,8 @@ import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import java.awt.Color;
 
-import data.Agent;
+import data.Salesman;
 import data.Receipt;
-//import data.Shirt;
-//import data.Skirt;
-//import data.Trouser;
-//import data.Coat;
 
 
 public class SelectionWindow extends JDialog {
@@ -62,12 +58,12 @@ public class SelectionWindow extends JDialog {
 	private float coatsSales;
 	private float trousersSales;
 	private double commission;
-	private InputWindow inputDialog;
-	private Agent selectedAgent;
+	private SalesmanSelectionWindow inputDialog;
+	private Salesman selectedAgent;
 	@SuppressWarnings("unused")
 	private String fileType;
 	
-	public SelectionWindow(InputWindow dialog, Agent agent, String fileTypeFlag) {
+	public SelectionWindow(SalesmanSelectionWindow dialog, Salesman agent, String fileTypeFlag) {
 		inputDialog = dialog;
 		selectedAgent = agent;
 		fileType = fileTypeFlag;
@@ -397,6 +393,7 @@ public class SelectionWindow extends JDialog {
 	
 	
 	protected void okButtonPressed(ActionEvent evt) {
+		
 		if(totalSalesCheckBox.isSelected())
 			 totalSales = selectedAgent.calculateTotalSales();
 		else
@@ -431,28 +428,20 @@ public class SelectionWindow extends JDialog {
 			commission = selectedAgent.calculateCommission();
 		else
 			commission = -1;
-		ResultWindow rs = new ResultWindow(this,selectedAgent, totalSales, totalItems, shirtSales, skirtSales, trousersSales, coatsSales, commission);
+		SalesDataExport rs = new SalesDataExport(this,selectedAgent, totalSales, totalItems, shirtSales, skirtSales, trousersSales, coatsSales, commission);
 		rs.setVisible(true);
 		this.setVisible(false);		
 	}
 	
 	
 	private void addReceiptButtonPressed(ActionEvent evt) {
-		if(receiptIDTextField.getText().isEmpty() && dateTextField.getText().isEmpty() 
-				&& kindTextField.getText().isEmpty() && salesTextField.getText().isEmpty()
-				&& itemsTextField.getText().isEmpty() && companyTextField.getText().isEmpty()
-				&& countryTextField.getText().isEmpty() && cityTextField.getText().isEmpty()
-				&& streetTextField.getText().isEmpty() && numberTextField.getText().isEmpty()){
-			JOptionPane.showMessageDialog(null,"selection window 2");
-			
-		}
-
-		else{
-			
-			addReceipt();
-			appendFile();
-			
-		}
+	    if (anyFieldNotEmpty()) {
+	        addReceipt();
+	        appendFile();
+	    } else {
+	        JOptionPane.showMessageDialog(null, "Error: Empty field");
+	    }
+	
 		receiptIDTextField.setText("");	
 		dateTextField.setText("");			
 		kindTextField.setText("");	
@@ -464,6 +453,22 @@ public class SelectionWindow extends JDialog {
 		streetTextField.setText("");	
 		numberTextField.setText("");	
 
+	}
+	
+	private boolean anyFieldNotEmpty() {
+	    JTextField[] textFields = {
+	            receiptIDTextField, dateTextField, kindTextField, salesTextField,
+	            itemsTextField, companyTextField, countryTextField, cityTextField,
+	            streetTextField, numberTextField
+	    };
+
+	    for (JTextField textField : textFields) {
+	        if (!textField.getText().isEmpty()) {
+	            return true; 
+	        }
+	    }
+
+	    return false; 
 	}
 
 	private void appendFile(){
@@ -485,13 +490,19 @@ public class SelectionWindow extends JDialog {
 		
 		
 		if(kindTextField.equals("Shirts"))	
-			receipt.getKind().setShirt(fileType); //TODO : is this right ?
+			receipt.getKind().setType("Shirts");
+		
 		else if (kindTextField.equals("Skirts"))
-			receipt = new Receipt();
+			
+			receipt.getKind().setType("Skirts");
+		
 		else if (kindTextField.equals("Trousers"))
-			receipt = new Receipt();
-		else if(kindTextField.equals("Coats"))				
-			receipt = new Receipt();
+			
+			receipt.getKind().setType("Trousers");
+		
+		else if(kindTextField.equals("Coats"))
+			
+			receipt.getKind().setType("Coats");
 		try{
 			receipt.setReceiptID(Integer.parseInt(receiptIDTextField.getText()));			
 			receipt.setDate(dateTextField.getText());

@@ -14,12 +14,12 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import data.Agent;
+import data.Salesman;
 
 public class XMLReport extends Report{
 
 		
-	public XMLReport(Agent a){
+	public XMLReport(Salesman a){
 			agent = a;
 	}	
 
