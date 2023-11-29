@@ -20,7 +20,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import java.awt.Color;
-
+import javax.swing.AbstractButton;
 import data.Salesman;
 import data.Receipt;
 
@@ -41,7 +41,7 @@ public class SelectionWindow extends JDialog {
 	private JTextField receiptIDTextField;
 	private JTextField numberTextField;
 	private JTextField numOfReceiptsTextField;
-	private JTextField agentNameTextField;
+	private JTextField salesmanNameTextField;
 	private int numOfReceipts = 0;
 	private double totalSales;
 	private JCheckBox totalSalesCheckBox;
@@ -59,13 +59,13 @@ public class SelectionWindow extends JDialog {
 	private float trousersSales;
 	private double commission;
 	private SalesmanSelectionWindow inputDialog;
-	private Salesman selectedAgent;
+	private Salesman selectedSalesman;
 	@SuppressWarnings("unused")
 	private String fileType;
 	
-	public SelectionWindow(SalesmanSelectionWindow dialog, Salesman agent, String fileTypeFlag) {
+	public SelectionWindow(SalesmanSelectionWindow dialog, Salesman salesman, String fileTypeFlag) {
 		inputDialog = dialog;
-		selectedAgent = agent;
+		selectedSalesman = salesman;
 		fileType = fileTypeFlag;
 		initialise();
 		
@@ -302,18 +302,18 @@ public class SelectionWindow extends JDialog {
 		lblNewLabel_11.setBounds(0, 75, 271, 29);
 		getContentPane().add(lblNewLabel_11);
 		
-		JLabel agentNameLabel = new JLabel("\u0391\u03BD\u03C4\u03B9\u03C0\u03C1\u03CC\u03C3\u03C9\u03C0\u03BF\u03C2:");
-		agentNameLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
-		agentNameLabel.setBounds(0, 8, 129, 25);
-		getContentPane().add(agentNameLabel);
+		JLabel salesmanNameLabel = new JLabel("\u0391\u03BD\u03C4\u03B9\u03C0\u03C1\u03CC\u03C3\u03C9\u03C0\u03BF\u03C2:");
+		salesmanNameLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+		salesmanNameLabel.setBounds(0, 8, 129, 25);
+		getContentPane().add(salesmanNameLabel);
 		
-		agentNameTextField = new JTextField();
-		agentNameTextField.setBackground(SystemColor.controlHighlight);
-		agentNameTextField.setEditable(false);
-		agentNameTextField.setFont(new Font("Tahoma", Font.BOLD, 16));
-		agentNameTextField.setBounds(135, 4, 174, 32);
-		getContentPane().add(agentNameTextField);
-		agentNameTextField.setColumns(10);
+		salesmanNameTextField = new JTextField();
+		salesmanNameTextField.setBackground(SystemColor.controlHighlight);
+		salesmanNameTextField.setEditable(false);
+		salesmanNameTextField.setFont(new Font("Tahoma", Font.BOLD, 16));
+		salesmanNameTextField.setBounds(135, 4, 174, 32);
+		getContentPane().add(salesmanNameTextField);
+		salesmanNameTextField.setColumns(10);
 		
 		categoryCheckBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -380,7 +380,7 @@ public class SelectionWindow extends JDialog {
 		});
 		
 		try{
-			agentNameTextField.setText(selectedAgent.getName());
+			salesmanNameTextField.setText(selectedSalesman.getName());
 		}catch(NullPointerException e){
 			
 			JOptionPane.showMessageDialog(null,"selection window 1");
@@ -391,48 +391,28 @@ public class SelectionWindow extends JDialog {
 	}
 	
 	
-	
 	protected void okButtonPressed(ActionEvent evt) {
-		
-		if(totalSalesCheckBox.isSelected())
-			 totalSales = selectedAgent.calculateTotalSales();
-		else
-			totalSales = -1;
-		
-		if(totalItemsCheckBox.isSelected())
-			totalItems = selectedAgent.calculateTotalItems();
-		else
-			totalItems = -1;
-		
-		if(shirtRadio.isSelected())
-			shirtSales = selectedAgent.calculateShirtsSales();
-		else
-			shirtSales = -1;
-		
-		if(skirtRadio.isSelected()  )
-			skirtSales = selectedAgent.calculateSkirtsSales();
-		else 
-			skirtSales = -1;
-		
-		if(coatRadio.isSelected())
-			coatsSales = selectedAgent.calculateCoatsSales();
-		else 
-			coatsSales = -1;
-		
-		if(trousersRadio.isSelected())
-			trousersSales = selectedAgent.calculateTrouserSales();
-		else 
-			trousersSales = -1;
-		
-		if(commissionCheckBox.isSelected())
-			commission = selectedAgent.calculateCommission();
-		else
-			commission = -1;
-		SalesDataExport rs = new SalesDataExport(this,selectedAgent, totalSales, totalItems, shirtSales, skirtSales, trousersSales, coatsSales, commission);
-		rs.setVisible(true);
-		this.setVisible(false);		
+	    totalSales = isSelected(totalSalesCheckBox) ? selectedSalesman.calculateTotalSales() : -1;
+	    totalItems = isSelected(totalItemsCheckBox) ? selectedSalesman.calculateTotalItems() : -1;
+	    shirtSales = isSelected(shirtRadio) ? selectedSalesman.calculateShirtsSales() : -1;
+	    skirtSales = isSelected(skirtRadio) ? selectedSalesman.calculateSkirtsSales() : -1;
+	    coatsSales = isSelected(coatRadio) ? selectedSalesman.calculateCoatsSales() : -1;
+	    trousersSales = isSelected(trousersRadio) ? selectedSalesman.calculateTrouserSales() : -1;
+	    commission = isSelected(commissionCheckBox) ? selectedSalesman.calculateCommission() : -1;
+
+	    SalesDataExport rs = new SalesDataExport(
+	        this, selectedSalesman, totalSales, totalItems, shirtSales, skirtSales, trousersSales, coatsSales, commission
+	    );
+
+	    rs.setVisible(true);
+	    this.setVisible(false);
 	}
-	
+
+
+	private boolean isSelected(AbstractButton button) {
+	    return button.isSelected();
+	}
+
 	
 	private void addReceiptButtonPressed(ActionEvent evt) {
 	    if (anyFieldNotEmpty()) {
@@ -441,18 +421,29 @@ public class SelectionWindow extends JDialog {
 	    } else {
 	        JOptionPane.showMessageDialog(null, "Error: Empty field");
 	    }
-	
-		receiptIDTextField.setText("");	
-		dateTextField.setText("");			
-		kindTextField.setText("");	
-		salesTextField.setText("");
-		itemsTextField.setText("");	
-		companyTextField.setText("");	
-		countryTextField.setText("");	
-		cityTextField.setText("");	
-		streetTextField.setText("");	
-		numberTextField.setText("");	
+	    clearTextFields();
+//		receiptIDTextField.setText("");	
+//		dateTextField.setText("");			
+//		kindTextField.setText("");	
+//		salesTextField.setText("");
+//		itemsTextField.setText("");	
+//		companyTextField.setText("");	
+//		countryTextField.setText("");	
+//		cityTextField.setText("");	
+//		streetTextField.setText("");	
+//		numberTextField.setText("");	
 
+	}
+	private void clearTextFields() {
+	    JTextField[] textFields = {
+	            receiptIDTextField, dateTextField, kindTextField, salesTextField,
+	            itemsTextField, companyTextField, countryTextField, cityTextField,
+	            streetTextField, numberTextField
+	    };
+
+	    for (JTextField textField : textFields) {
+	        textField.setText("");
+	    }
 	}
 	
 	private boolean anyFieldNotEmpty() {
@@ -463,26 +454,26 @@ public class SelectionWindow extends JDialog {
 	    };
 
 	    for (JTextField textField : textFields) {
-	        if (!textField.getText().isEmpty()) {
-	            return true; 
+	        if (textField.isVisible() && textField.getText().isEmpty()) {
+	            return false; // Field is empty
 	        }
 	    }
 
-	    return false; 
+	    return true;
 	}
 
 	private void appendFile(){
-		selectedAgent.getFileAppender().setReceiptID(receiptIDTextField.getText());
-		selectedAgent.getFileAppender().setDate(dateTextField.getText());
-		selectedAgent.getFileAppender().setKind(kindTextField.getText());
-		selectedAgent.getFileAppender().setSales(salesTextField.getText());
-		selectedAgent.getFileAppender().setItems(itemsTextField.getText());
-		selectedAgent.getFileAppender().setCompany(companyTextField.getText());
-		selectedAgent.getFileAppender().setCountry(countryTextField.getText());
-		selectedAgent.getFileAppender().setCity(cityTextField.getText());
-		selectedAgent.getFileAppender().setStreet(streetTextField.getText());
-		selectedAgent.getFileAppender().setNumber(numberTextField.getText());
-		selectedAgent.getFileAppender().appendFile();
+		selectedSalesman.getFileAppender().setReceiptID(receiptIDTextField.getText());
+		selectedSalesman.getFileAppender().setDate(dateTextField.getText());
+		selectedSalesman.getFileAppender().setKind(kindTextField.getText());
+		selectedSalesman.getFileAppender().setSales(salesTextField.getText());
+		selectedSalesman.getFileAppender().setItems(itemsTextField.getText());
+		selectedSalesman.getFileAppender().setCompany(companyTextField.getText());
+		selectedSalesman.getFileAppender().setCountry(countryTextField.getText());
+		selectedSalesman.getFileAppender().setCity(cityTextField.getText());
+		selectedSalesman.getFileAppender().setStreet(streetTextField.getText());
+		selectedSalesman.getFileAppender().setNumber(numberTextField.getText());
+		selectedSalesman.getFileAppender().appendFile();
 	}
 	
 	private void addReceipt(){
@@ -513,13 +504,14 @@ public class SelectionWindow extends JDialog {
 			receipt.getCompany().getCompanyAddress().setCity(cityTextField.getText());
 			receipt.getCompany().getCompanyAddress().setStreet(streetTextField.getText());
 			receipt.getCompany().getCompanyAddress().setStreetNumber(Integer.parseInt(numberTextField.getText()));
-			selectedAgent.getReceipts().add(receipt);
+			selectedSalesman.getReceipts().add(receipt);
 			numOfReceipts++;
 			numOfReceiptsTextField.setText(Integer.toString(numOfReceipts));
 			JOptionPane.showMessageDialog(null,"selection window 3");
 
 		}catch (NumberFormatException e){
 			JOptionPane.showMessageDialog(null,"selection window 4");
+			System.exit(0);
 
 		}
 	}

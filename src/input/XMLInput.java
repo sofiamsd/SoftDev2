@@ -25,14 +25,14 @@ public class XMLInput extends Input {
         	Document doc = docBuilder.parse(inputFile);
         	 
         	doc.getDocumentElement().normalize();
-            NodeList nodeLst = doc.getElementsByTagName("Agent");
+            NodeList nodeLst = doc.getElementsByTagName("Salesman");
 			
         	name = ((Element) nodeLst.item(0)).getElementsByTagName("Name").
 			item(0).getChildNodes().item(0).getNodeValue().trim();
 			
         	afm = ((Element) nodeLst.item(0)).getElementsByTagName("AFM").
 			item(0).getChildNodes().item(0).getNodeValue().trim();
-        	addAgent();
+        	addSalesman();
         	NodeList receiptsNodeList = ((Element) nodeLst.
 			item(0)).getElementsByTagName("Receipt");
 			

@@ -10,7 +10,7 @@ import data.Receipt;
 
 public abstract class Input {
 	
-	protected Salesman agent;
+	protected Salesman salesman;
 	protected File inputFile;
 	protected String inputFilePath;
 	protected String name;
@@ -31,7 +31,7 @@ public abstract class Input {
 
 	
 	public Input() {
-		agent = new Salesman();
+		salesman = new Salesman();
 		kind = new Kind("");
 		
 
@@ -39,9 +39,9 @@ public abstract class Input {
 	
 
 	
-	public void addAgent() {
-		agent.setName(name);
-		agent.setAfm(afm);
+	public void addSalesman() {
+		salesman.setName(name);
+		salesman.setAfm(afm);
 	}
 	
 	public void addReceipt( ){
@@ -71,10 +71,10 @@ public abstract class Input {
 		receipt.getCompany().getCompanyAddress().setCity(companyCity);
 		receipt.getCompany().getCompanyAddress().setStreet(companyStreet);
 		receipt.getCompany().getCompanyAddress().setStreetNumber(companyStreetNumber);
-		agent.getReceipts().add(receipt);
+		salesman.getReceipts().add(receipt);
 	}
-	public Salesman getAgent() {
-		return agent;
+	public Salesman getSalesman() {
+		return salesman;
 	}
 
 	

@@ -44,10 +44,10 @@ public class SalesmanSelectionWindow extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private final JPanel inputWindowPanel = new JPanel();
 	private DefaultListModel <String> listModel = new DefaultListModel <String>();
-	private JList <String> agentsList = new JList <String>();
-	private ArrayList<Salesman> allAgents;
-	private  Salesman agent = new Salesman();
-	private Salesman selectedAgent = null;
+	private JList <String> salesmenList = new JList <String>();
+	private ArrayList<Salesman> allSalesmen;
+	private  Salesman salesman = new Salesman();
+	private Salesman selectedSalesman = null;
 	static SalesmanSelectionWindow dialog = new SalesmanSelectionWindow();
 	@SuppressWarnings("unused")
 	private File inputFile;
@@ -75,7 +75,7 @@ public class SalesmanSelectionWindow extends JDialog {
 	}
 	
 	public void initialise() {
-		allAgents = new ArrayList<Salesman>();
+		allSalesmen = new ArrayList<Salesman>();
 		
 		setBackground(new Color(0, 0, 0));
 	    setBounds(100, 100, 736, 472);
@@ -102,16 +102,16 @@ public class SalesmanSelectionWindow extends JDialog {
 				
 				JLabel label = new JLabel("\u0395\u03C0\u03B9\u03BB\u03AD\u03BE\u03C4\u03B5 \u03B5\u03AF\u03B4\u03BF\u03C2 \u03B1\u03C1\u03C7\u03B5\u03AF\u03BF\u03C5 \u03B3\u03B9\u03B1 \u03C6\u03CC\u03C1\u03C4\u03C9\u03C3\u03B7 \u03B1\u03C0\u03BF\u03B4\u03B5\u03AF\u03BE\u03B5\u03C9\u03BD:");
 				label.setFont(new Font("Times New Roman", Font.PLAIN, 14));
-				agentsList.addMouseListener(new MouseAdapter() {
+				salesmenList.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						selectAgent(e);
+						selectSalesman(e);
 					}
 				});
 				
-				agentsList.setFont(new Font("Times New Roman", Font.PLAIN, 19));
-				agentsList.setBackground(UIManager.getColor("Button.light"));
-				agentsList.setBorder(new LineBorder(new Color(0, 0, 0)));
+				salesmenList.setFont(new Font("Times New Roman", Font.PLAIN, 19));
+				salesmenList.setBackground(UIManager.getColor("Button.light"));
+				salesmenList.setBorder(new LineBorder(new Color(0, 0, 0)));
 				
 				
 				JLabel label_1 = new JLabel("\u039B\u03B9\u03C3\u03C4\u03B1 \u0391\u03BD\u03C4\u03B9\u03C0\u03C1\u03BF\u03C3\u03CE\u03C0\u03C9\u03BD");
@@ -153,7 +153,7 @@ public class SalesmanSelectionWindow extends JDialog {
 									.addComponent(buttonXMLInput, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
 							.addGap(18)
 							.addGroup(gl_inputWindowPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(agentsList, GroupLayout.PREFERRED_SIZE, 309, GroupLayout.PREFERRED_SIZE)
+								.addComponent(salesmenList, GroupLayout.PREFERRED_SIZE, 309, GroupLayout.PREFERRED_SIZE)
 								.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE))
 							.addContainerGap(57, Short.MAX_VALUE))
 						.addGroup(Alignment.TRAILING, gl_inputWindowPanel.createSequentialGroup()
@@ -176,7 +176,7 @@ public class SalesmanSelectionWindow extends JDialog {
 									.addComponent(buttonHTMLInput, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 									.addGap(18)
 									.addComponent(buttonXMLInput, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
-								.addComponent(agentsList, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE))
+								.addComponent(salesmenList, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE))
 							.addGap(139)
 							.addGroup(gl_inputWindowPanel.createParallelGroup(Alignment.LEADING)
 								.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
@@ -213,15 +213,15 @@ public class SalesmanSelectionWindow extends JDialog {
 		TXTFileChooser.showOpenDialog(null);
 		boolean agentDuplicate = false;
 		try{
-			File recieptFileTXT = TXTFileChooser.getSelectedFile();
-			TXTInput inputFileTXT = new TXTInput(recieptFileTXT);	
+			File receiptFileTXT = TXTFileChooser.getSelectedFile();
+			TXTInput inputFileTXT = new TXTInput(receiptFileTXT);	
 			inputFileTXT.readFile();
-			agent = inputFileTXT.getAgent();
-			agent.setFileType("TXT");
-			agent.getFileAppender().setFileToAppend(recieptFileTXT);				
-			allAgents.add(agent);
+			salesman = inputFileTXT.getSalesman();
+			salesman.setFileType("TXT");
+			salesman.getFileAppender().setFileToAppend(receiptFileTXT);				
+			allSalesmen.add(salesman);
 			for(int i = 0; i< listModel.getSize(); i++){
-				if(agent.getName().equals(listModel.getElementAt(i))){
+				if(salesman.getName().equals(listModel.getElementAt(i))){
 					agentDuplicate = true;
 
 				}
@@ -231,8 +231,8 @@ public class SalesmanSelectionWindow extends JDialog {
 
 			}
 			else{
-				listModel.addElement(agent.getName());
-				agentsList.setModel(listModel);
+				listModel.addElement(salesman.getName());
+				salesmenList.setModel(listModel);
 				fileTypeFlag = "TXT";
 			}
 		}catch (IllegalArgumentException e){
@@ -254,12 +254,12 @@ public class SalesmanSelectionWindow extends JDialog {
 			File recieptFileXML = XMLFileChooser.getSelectedFile();
 			XMLInput inputFileXML = new XMLInput(recieptFileXML);	
 			inputFileXML.readFile();
-			agent = inputFileXML.getAgent();
-			agent.setFileType("XML");
-			agent.getFileAppender().setFileToAppend(recieptFileXML);				
-			allAgents.add(agent);
+			salesman = inputFileXML.getSalesman();
+			salesman.setFileType("XML");
+			salesman.getFileAppender().setFileToAppend(recieptFileXML);				
+			allSalesmen.add(salesman);
 			for(int i = 0; i< listModel.getSize(); i++){
-				if(agent.getName().equals(listModel.getElementAt(i))){
+				if(salesman.getName().equals(listModel.getElementAt(i))){
 					agentDuplicate = true;
 
 				}
@@ -269,8 +269,8 @@ public class SalesmanSelectionWindow extends JDialog {
 
 			}
 			else{
-				listModel.addElement(agent.getName());
-				agentsList.setModel(listModel);
+				listModel.addElement(salesman.getName());
+				salesmenList.setModel(listModel);
 				fileTypeFlag = "XML";
 			}
 		}catch (IllegalArgumentException e){
@@ -292,12 +292,12 @@ public class SalesmanSelectionWindow extends JDialog {
 			
 			HTMLInput inputFileHTML = new HTMLInput(receiptFileHTML);	
 			inputFileHTML.readFile();
-			agent = inputFileHTML.getAgent();
-			agent.setFileType("HTML");
-			agent.getFileAppender().setFileToAppend(receiptFileHTML);				
-			allAgents.add(agent);
+			salesman = inputFileHTML.getSalesman();
+			salesman.setFileType("HTML");
+			salesman.getFileAppender().setFileToAppend(receiptFileHTML);				
+			allSalesmen.add(salesman);
 			for(int i = 0; i< listModel.getSize(); i++){
-				if(agent.getName().equals(listModel.getElementAt(i))){
+				if(salesman.getName().equals(listModel.getElementAt(i))){
 					agentDuplicate = true;
 
 				}
@@ -307,8 +307,8 @@ public class SalesmanSelectionWindow extends JDialog {
 
 			}
 			else{
-				listModel.addElement(agent.getName());
-				agentsList.setModel(listModel);
+				listModel.addElement(salesman.getName());
+				salesmenList.setModel(listModel);
 				fileTypeFlag = "HTML";
 			}
 		}catch (IllegalArgumentException e){
@@ -320,16 +320,16 @@ public class SalesmanSelectionWindow extends JDialog {
              
 	}
 
-	private void selectAgent(MouseEvent e){
+	private void selectSalesman(MouseEvent e){
 		
-		String agentName;
-        if(agentsList.getSelectedIndex()>=0){
+		String salesmanName;
+        if(salesmenList.getSelectedIndex()>=0){
         	
-            agentName = agentsList.getSelectedValue().toString();
-            for(int i=0; i<allAgents.size(); i++){
-                if(agentName.equals(allAgents.get(i).getName())){
+            salesmanName = salesmenList.getSelectedValue().toString();
+            for(int i=0; i<allSalesmen.size(); i++){
+                if(salesmanName.equals(allSalesmen.get(i).getName())){
                 	
-                		selectedAgent = allAgents.get(i);
+                		selectedSalesman = allSalesmen.get(i);
                 		break;
                 		
                 }
@@ -339,12 +339,12 @@ public class SalesmanSelectionWindow extends JDialog {
 	}
 	
 	private void okButtonPressed(ActionEvent evt) {
-		if(agentsList.isSelectionEmpty()){
+		if(salesmenList.isSelectionEmpty()){
 			JOptionPane.showMessageDialog(null,"input window 6");
-
+			
 		}
 		else{
-			SelectionWindow sw = new SelectionWindow(dialog,selectedAgent,fileTypeFlag);
+			SelectionWindow sw = new SelectionWindow(dialog,selectedSalesman,fileTypeFlag);
 			this.setVisible(false);
 			sw.setVisible(true);
 		}	

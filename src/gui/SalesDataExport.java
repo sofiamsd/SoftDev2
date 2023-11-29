@@ -14,9 +14,9 @@ import java.awt.Font;
 
 import javax.swing.UIManager;
 
-import output.HTMLReport;
-import output.TXTReport;
-import output.XMLReport;
+import output.GenerateHTMLReport;
+import output.GenerateTXTReport;
+import output.GenerateXMLReport;
 import data.Salesman;
 
 import java.awt.Color;
@@ -36,7 +36,7 @@ public class SalesDataExport extends JDialog {
 	private JTextField skirtSalesTextField;
 	private JTextField commissionTextField;
 	private SelectionWindow selectionWindow;
-	private Salesman selectedAgent;
+	private Salesman selectedsalesman;
 	private double totalSales;
 	private int totalItems;
 	private float shirtSales;
@@ -46,10 +46,10 @@ public class SalesDataExport extends JDialog {
 	private double commission;
 
 
-	public SalesDataExport(final SelectionWindow sw, Salesman agent,double tSales,int tItems,
+	public SalesDataExport(final SelectionWindow sw, Salesman salesman,double tSales,int tItems,
 			float shirtS,float skirtS,float trousersS,float coatsS,double com) {
 		selectionWindow = sw;
-		selectedAgent = agent;
+		selectedsalesman = salesman;
 		totalSales = tSales;
 		totalItems = tItems;
 		shirtSales = shirtS;
@@ -246,7 +246,7 @@ public class SalesDataExport extends JDialog {
 				
 	}
 	private void outputTXTButtonPressed(ActionEvent evt) {
-		TXTReport makeTXTFile = new TXTReport(selectedAgent);
+		GenerateTXTReport makeTXTFile = new GenerateTXTReport(selectedsalesman);
 		makeTXTFile.saveFile();
 		JOptionPane.showMessageDialog(null,"result window 1");
 
@@ -254,14 +254,14 @@ public class SalesDataExport extends JDialog {
 	}
 	
 	private void outputXMLButtonPressed(ActionEvent evt) {
-		XMLReport makeXMLFile = new XMLReport(selectedAgent);
+		GenerateXMLReport makeXMLFile = new GenerateXMLReport(selectedsalesman);
 		makeXMLFile.saveFile();
 		JOptionPane.showMessageDialog(null,"result window 2");		
 	}
 	
 	
 	private void outputHTMLButtonPressed(ActionEvent evt) {
-		HTMLReport makeHTMLFile = new HTMLReport(selectedAgent);
+		GenerateHTMLReport makeHTMLFile = new GenerateHTMLReport(selectedsalesman);
 		makeHTMLFile.saveFile();
 		JOptionPane.showMessageDialog(null,"result window 3");		
 	}

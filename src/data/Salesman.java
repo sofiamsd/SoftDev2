@@ -58,45 +58,34 @@ public class Salesman {
 		return sumItems;
 	}
 	
-	public float calculateSkirtsSales(){
-		float skirtSum = 0;
-		for (int i = 0; i< allReceipts.size(); i++){
-			if(allReceipts.get(i).kind.getType().equals("Skirts")){
-				skirtSum += allReceipts.get(i).getItems();
-			}
-		}
-		return skirtSum;
-	}
+    public float calculateClothingSales(String clothingType) {
+        float salesSum = 0;
+        for (Receipt receipt : allReceipts) {
+            if (receipt.kind.getType().equals(clothingType)) {
+                salesSum += receipt.getItems();
+            }
+        }
+        return salesSum;
 
-	public float calculateCoatsSales(){
-		float coatsSum = 0;
-		for (int i = 0; i< allReceipts.size(); i++){
-				if(allReceipts.get(i).kind.getType().equals("Coat")){
-					coatsSum += allReceipts.get(i).getItems();
-				}
-		}		
-		return coatsSum;
-	}
-	
-	public float calculateTrouserSales(){
-		float trousersSum = 0;
-		for (int i = 0; i< allReceipts.size(); i++){
-			if(allReceipts.get(i).kind.getType().equals("Trousers")){
-				trousersSum += allReceipts.get(i).getItems();
-			}	
-		}
-		return trousersSum;
-	}
-	
-	public float calculateShirtsSales(){
-		float shirtSum = 0;
-		for (int i = 0; i< allReceipts.size(); i++){
-			if(allReceipts.get(i).kind.getType().equals("Shirts")){
-				shirtSum += allReceipts.get(i).getItems();
-			}	
-		}
-		return shirtSum;
-	}
+    }
+
+
+
+    public float calculateCoatsSales() {
+        return calculateClothingSales("Coat");
+    }
+
+    public float calculateTrouserSales() {
+        return calculateClothingSales("Trousers");
+    }
+
+    public float calculateShirtsSales() {
+        return calculateClothingSales("Shirts");  
+    }
+    
+    public float calculateSkirtsSales() {
+        return calculateClothingSales("Skirts" );
+    }
 	
 	public double calculateCommission(){
 		double commission = 0;

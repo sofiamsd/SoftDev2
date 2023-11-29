@@ -2,9 +2,9 @@ package output;
 
 import data.Salesman;
 
-public abstract class Report {
+public abstract class GenerateReport {
 
-	protected Salesman agent;
+	protected Salesman salesman;
 	
 	public abstract void saveFile();
 }

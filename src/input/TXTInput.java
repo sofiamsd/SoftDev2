@@ -1,6 +1,7 @@
- package input;
+package input;
 
 import java.io.BufferedReader;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -37,7 +38,7 @@ public class TXTInput extends Input{
 						
 				if(line.startsWith("AFM")){
 					afm = (line.substring(line.indexOf(":") + 1).trim());
-					addAgent();
+					addSalesman();
 					continue;
 				}
 						
