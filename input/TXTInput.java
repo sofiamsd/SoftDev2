@@ -19,7 +19,7 @@ public class TXTInput extends Input{
 	
 	@Override
 	public void readFile()  {
-		 BufferedReader br = null;
+		BufferedReader br = null;
 	    try {
 	            	
 			br = new BufferedReader(new FileReader(inputFilePath));

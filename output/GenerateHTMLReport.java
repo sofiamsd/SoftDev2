@@ -12,31 +12,38 @@ import data.Salesman;
 
 public class GenerateHTMLReport extends GenerateReport {
 
-    public GenerateHTMLReport(Salesman a) {
-        salesman = a;
+    public GenerateHTMLReport(Salesman salesman) {
+        this.salesman = salesman;
     }
 
     public void saveFile() {
-        //BufferedWriter bufferedWriter = null;
         try {
-        	String fullPathName = getFilePathFromUser();
+            String fullPathName = getFilePathFromUser();
 
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(new File(fullPathName)));
 
-            // Writing HTML structure
-            bufferedWriter.write("<html>");
+            bufferedWriter.write("<!DOCTYPE html>");
+            bufferedWriter.newLine();
+            bufferedWriter.write("<html lang=\"en\">");
             bufferedWriter.newLine();
             bufferedWriter.write("<head>");
             bufferedWriter.newLine();
-            bufferedWriter.write("<title>Sales Report</title>");
+            bufferedWriter.write("    <meta charset=\"UTF-8\">");
+            bufferedWriter.newLine();
+            bufferedWriter.write("    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">");
+            bufferedWriter.newLine();
+            bufferedWriter.write("    <title>Sales Report</title>");
             bufferedWriter.newLine();
             bufferedWriter.write("</head>");
             bufferedWriter.newLine();
             bufferedWriter.write("<body>");
             bufferedWriter.newLine();
+            bufferedWriter.newLine();
 
-            // Writing agent information
-            bufferedWriter.write("<h1>Agent Information</h1>");
+            bufferedWriter.write("<h1>Sales Report</h1>");
+            bufferedWriter.newLine();
+
+            bufferedWriter.write("<h2>Personal Information:</h2>");
             bufferedWriter.newLine();
             bufferedWriter.write("<p><strong>Name:</strong> " + salesman.getName() + "</p>");
             bufferedWriter.newLine();
@@ -44,8 +51,7 @@ public class GenerateHTMLReport extends GenerateReport {
             bufferedWriter.newLine();
             bufferedWriter.newLine();
 
-            // Writing sales information
-            bufferedWriter.write("<h2>Sales Information</h2>");
+            bufferedWriter.write("<h2>Sales Details:</h2>");
             bufferedWriter.newLine();
             bufferedWriter.write("<p><strong>Total Sales:</strong> " + salesman.calculateTotalSales() + "</p>");
             bufferedWriter.newLine();
@@ -60,38 +66,30 @@ public class GenerateHTMLReport extends GenerateReport {
             bufferedWriter.write("<p><strong>Commission:</strong> " + salesman.calculateCommission() + "</p>");
             bufferedWriter.newLine();
 
-            // Closing HTML structure
             bufferedWriter.write("</body>");
             bufferedWriter.newLine();
             bufferedWriter.write("</html>");
 
-            JOptionPane.showMessageDialog(null, "HTML file generated successfully!");
+            bufferedWriter.close();
+            //JOptionPane.showMessageDialog(null, "HTML report generated successfully!");
 
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Error: Couldn't generate HTML file. " + ex.getMessage());
-//        } finally {
-//            try {
-//                if (bufferedWriter != null) {
-//                    bufferedWriter.close();
-//                }
-//            } catch (IOException ex) {
-//                JOptionPane.showMessageDialog(null, "Error: Couldn't close the BufferedWriter. " + ex.getMessage());
-//            }
+            JOptionPane.showMessageDialog(null, "Couldn't generate HTML file");
         }
     }
-    // Helper method to get file path from the user using JFileChooser
+
+
     private String getFilePathFromUser() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Specify a file to save");
-        
+
         int userSelection = fileChooser.showSaveDialog(null);
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File fileToSave = fileChooser.getSelectedFile();
-            return fileToSave.getAbsolutePath();
+            return fileToSave.getAbsolutePath() + ".html"; 
         } else {
-            // User canceled the operation
+           
             return null;
         }
     }
 }
-

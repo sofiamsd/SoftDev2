@@ -39,7 +39,7 @@ public class GenerateXMLReport extends GenerateReport{
 	            File fileToSave = fileChooser.getSelectedFile();
 
 	            if (!fileToSave.getName().toLowerCase().endsWith(".xml")) {
-	                // Ensure the file has a .xml extension
+	                
 	                fileToSave = new File(fileToSave.getAbsolutePath() + ".xml");
 	            }
 

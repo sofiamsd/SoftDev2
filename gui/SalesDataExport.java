@@ -248,7 +248,7 @@ public class SalesDataExport extends JDialog {
 	private void outputTXTButtonPressed(ActionEvent evt) {
 		GenerateTXTReport makeTXTFile = new GenerateTXTReport(selectedsalesman);
 		makeTXTFile.saveFile();
-		JOptionPane.showMessageDialog(null,"result window 1");
+		JOptionPane.showMessageDialog(null,"TXT report has been made!");
 
 		
 	}
@@ -256,14 +256,14 @@ public class SalesDataExport extends JDialog {
 	private void outputXMLButtonPressed(ActionEvent evt) {
 		GenerateXMLReport makeXMLFile = new GenerateXMLReport(selectedsalesman);
 		makeXMLFile.saveFile();
-		JOptionPane.showMessageDialog(null,"result window 2");		
+		JOptionPane.showMessageDialog(null,"XML report has been made!");		
 	}
 	
 	
 	private void outputHTMLButtonPressed(ActionEvent evt) {
 		GenerateHTMLReport makeHTMLFile = new GenerateHTMLReport(selectedsalesman);
 		makeHTMLFile.saveFile();
-		JOptionPane.showMessageDialog(null,"result window 3");		
+		JOptionPane.showMessageDialog(null,"HTML report has been made!");		
 	}
 	private void okButtonPressed(ActionEvent evt) {
 		System.exit(0);		

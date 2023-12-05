@@ -73,6 +73,4 @@ public abstract class Input {
 	public Salesman getSalesman() {
 		return salesman;
 	}
-
-	
 }

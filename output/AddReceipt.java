@@ -1,24 +1,24 @@
 package output;
 
 import java.io.File;
-//import data.*;
+import java.util.ArrayList;
+import java.util.Collections;
+
 
 public abstract class AddReceipt {
 
 	protected File fileToAppend;
-	protected String receiptID;
-	protected String date;
-	protected String kind;
-	protected String sales;
-	protected String items;
-	protected String company;
-	protected String country;
-	protected String city;
-	protected String street;
-	protected String number;
+	protected String receiptID, date,kind,sales,items,company,country,city,street,number;
+	
+	ArrayList<String> receipt = new ArrayList<String>();
 
 	public abstract void appendFile();
 	public abstract void setFileToAppend(File fileToAppend); 
+	
+	public void stringAdd() {
+		Collections.addAll(receipt, "ReceiptID", "Date","Kind","Sales","Items","Company","Country","City","Street","Number");
+	}
+	
 	
 	public void setReceiptID(String receiptID) {
 		this.receiptID = receiptID;
@@ -69,5 +69,5 @@ public abstract class AddReceipt {
 	public void setNumber(String number) {
 		this.number = number;
 	}
-}
 
+}

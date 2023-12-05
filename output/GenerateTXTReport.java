@@ -62,7 +62,7 @@ public class GenerateTXTReport extends GenerateReport{
         
 		
 	}
-    // Helper method to get file path from the user using JFileChooser
+
     private String getFilePathFromUser() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Specify a file to save");
@@ -70,9 +70,8 @@ public class GenerateTXTReport extends GenerateReport{
         int userSelection = fileChooser.showSaveDialog(null);
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File fileToSave = fileChooser.getSelectedFile();
-            return fileToSave.getAbsolutePath();
+            return fileToSave.getAbsolutePath() + ".txt"; 
         } else {
-            // User canceled the operation
             return null;
         }
     }

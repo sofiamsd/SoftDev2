@@ -383,7 +383,7 @@ public class SelectionWindow extends JDialog {
 			salesmanNameTextField.setText(selectedSalesman.getName());
 		}catch(NullPointerException e){
 			
-			JOptionPane.showMessageDialog(null,"selection window 1");
+			JOptionPane.showMessageDialog(null,"Error: Salesman's name is not given");
 
 		}
 		
@@ -422,16 +422,7 @@ public class SelectionWindow extends JDialog {
 	        JOptionPane.showMessageDialog(null, "Error: Empty field");
 	    }
 	    clearTextFields();
-//		receiptIDTextField.setText("");	
-//		dateTextField.setText("");			
-//		kindTextField.setText("");	
-//		salesTextField.setText("");
-//		itemsTextField.setText("");	
-//		companyTextField.setText("");	
-//		countryTextField.setText("");	
-//		cityTextField.setText("");	
-//		streetTextField.setText("");	
-//		numberTextField.setText("");	
+	
 
 	}
 	private void clearTextFields() {
@@ -507,10 +498,10 @@ public class SelectionWindow extends JDialog {
 			selectedSalesman.getReceipts().add(receipt);
 			numOfReceipts++;
 			numOfReceiptsTextField.setText(Integer.toString(numOfReceipts));
-			JOptionPane.showMessageDialog(null,"selection window 3");
+			JOptionPane.showMessageDialog(null,"A receipt has been added");
 
 		}catch (NumberFormatException e){
-			JOptionPane.showMessageDialog(null,"selection window 4");
+			JOptionPane.showMessageDialog(null,"Error while adding receipt");
 			System.exit(0);
 
 		}

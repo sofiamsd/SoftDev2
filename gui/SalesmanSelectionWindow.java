@@ -227,7 +227,7 @@ public class SalesmanSelectionWindow extends JDialog {
 				}
 			}
 			if(salesmanDuplicate == true){
-				JOptionPane.showMessageDialog(null,"input window 1");
+				JOptionPane.showMessageDialog(null,"Salesman already exists");
 
 			}
 			else{
@@ -237,7 +237,7 @@ public class SalesmanSelectionWindow extends JDialog {
 			}
 		}catch (IllegalArgumentException e){
 		
-			JOptionPane.showMessageDialog(null,"Error: Receipt is missing a field");
+			JOptionPane.showMessageDialog(null,"Error: TXT is missing a field");
 
 		}
         
@@ -275,7 +275,7 @@ public class SalesmanSelectionWindow extends JDialog {
 			}
 		}catch (IllegalArgumentException e){
 		
-			JOptionPane.showMessageDialog(null,"Error: Receipt is missing a field");
+			JOptionPane.showMessageDialog(null,"Error: XML is missing a field");
 
 		}
         
@@ -303,7 +303,7 @@ public class SalesmanSelectionWindow extends JDialog {
 				}
 			}
 			if(salesmanDuplicate == true){
-				JOptionPane.showMessageDialog(null,"input window 7");
+				JOptionPane.showMessageDialog(null,"Salesman already exists");
 
 			}
 			else{
@@ -313,7 +313,7 @@ public class SalesmanSelectionWindow extends JDialog {
 			}
 		}catch (IllegalArgumentException e){
 		
-			JOptionPane.showMessageDialog(null,"Error: Receipt is missing a field");
+			JOptionPane.showMessageDialog(null,"Error: HTML is missing a field");
 
 		}
         
@@ -340,7 +340,7 @@ public class SalesmanSelectionWindow extends JDialog {
 	
 	private void okButtonPressed(ActionEvent evt) {
 		if(salesmenList.isSelectionEmpty()){
-			JOptionPane.showMessageDialog(null,"input window 6");
+			JOptionPane.showMessageDialog(null,"Error : Salesman list is empty");
 			
 		}
 		else{
