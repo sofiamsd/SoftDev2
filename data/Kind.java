@@ -5,10 +5,6 @@ public class Kind {
 	
 	private String clothingType;
 
-    public Kind(String clothingType) {
-
-		this.clothingType = clothingType;
-	}
 
 	public String getType() {
         return clothingType;

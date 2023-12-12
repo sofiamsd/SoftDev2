@@ -1,7 +1,7 @@
 package data;
 public class Company {
 
-		private String companyName;
+		private String company;
 		private Address companyAddress;
 		
 		
@@ -9,12 +9,12 @@ public class Company {
 			companyAddress = new Address();
 		}
 		
-		public String getName() {
-			return companyName;
+		public String getCompany() {
+			return company;
 		}
 		
-		public void setName(String name) {
-			this.companyName = name;
+		public void setCompany(String company) {
+			this.company = company;
 		}
 		
 		
@@ -22,4 +22,6 @@ public class Company {
 			
 			return companyAddress;
 		}
+
+
 }

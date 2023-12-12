@@ -1,6 +1,5 @@
 package input;
 
-import java.io.File;
 import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -8,79 +7,64 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-
+import java.io.File;
 
 public class XMLInput extends Input {
- 
-	public XMLInput(File receiptFileXML ){
-		inputFile = receiptFileXML;
-		
-	}
+
+    public XMLInput(File receiptFileXML) {
+        inputFile = receiptFileXML;
+    }
+
+    @Override
     public void readFile() {
         try {
-        	DocumentBuilderFactory docBuilderFactory 
-			= DocumentBuilderFactory.newInstance();
-        	DocumentBuilder docBuilder
-			= docBuilderFactory.newDocumentBuilder();
-        	Document doc = docBuilder.parse(inputFile);
-        	 
-        	doc.getDocumentElement().normalize();
+            DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+            Document doc = docBuilder.parse(inputFile);
+
+            doc.getDocumentElement().normalize();
             NodeList nodeLst = doc.getElementsByTagName("Salesman");
-			
-        	name = ((Element) nodeLst.item(0)).getElementsByTagName("Name").
-			item(0).getChildNodes().item(0).getNodeValue().trim();
-			
-        	afm = ((Element) nodeLst.item(0)).getElementsByTagName("AFM").
-			item(0).getChildNodes().item(0).getNodeValue().trim();
-        	addSalesman();
-        	NodeList receiptsNodeList = ((Element) nodeLst.
-			item(0)).getElementsByTagName("Receipt");
-			
+
+            name = getValueFromNode(nodeLst, "Name");
+            afm = getValueFromNode(nodeLst, "AFM");
+            addSalesman();
+
+            NodeList receiptsNodeList = doc.getElementsByTagName("Receipt");
             int size = receiptsNodeList.getLength();
-            for(int i=0; i<size; i++){
-            	receiptID = Integer.parseInt(((Element) receiptsNodeList.item(i)).
-				getElementsByTagName("ReceiptID").item(0).getChildNodes().item(0).getNodeValue().trim());
-            	
-            	date = ((Element) receiptsNodeList.item(i)).
-				getElementsByTagName("Date").item(0).getChildNodes().item(0).getNodeValue().trim();
-				
-            	clothingType = ((Element) receiptsNodeList.item(i))
-				.getElementsByTagName("Kind").item(0).getChildNodes().item(0).getNodeValue().trim();
-				
-            	sales = Double.parseDouble(((Element) receiptsNodeList.item(i)).
-				getElementsByTagName("Sales").item(0).getChildNodes().item(0).getNodeValue().trim());
-            	
-				items = Integer.parseInt(((Element) receiptsNodeList.item(i))
-				.getElementsByTagName("Items").item(0).getChildNodes().item(0).getNodeValue().trim());
-            	
-				companyName = ((Element) receiptsNodeList.item(i)).
-				getElementsByTagName("Company").item(0).getChildNodes().item(0).getNodeValue().trim();
-            	
-				companyCountry = ((Element) receiptsNodeList.item(i)).
-				getElementsByTagName("Country").item(0).getChildNodes().item(0).getNodeValue().trim();
-            	
-				companyCity = ((Element) receiptsNodeList.item(i)).
-				getElementsByTagName("City").item(0).getChildNodes().item(0).getNodeValue().trim();
-            	
-				companyStreet = ((Element) receiptsNodeList.item(i)).
-				getElementsByTagName("Street").item(0).getChildNodes().item(0).getNodeValue().trim();
-            	
-				companyStreetNumber = Integer.parseInt(((Element) receiptsNodeList.item(i)).
-				getElementsByTagName("Number").item(0).getChildNodes().item(0).getNodeValue().trim());
-            	
-				addReceipt();
+
+            for (int i = 0; i < size; i++) {
+                Element receiptElement = (Element) receiptsNodeList.item(i);
+
+                receiptID = Integer.parseInt(getValueFromNode(receiptElement, "ReceiptID"));
+                date = getValueFromNode(receiptElement, "Date");
+                clothingType = getValueFromNode(receiptElement, "Kind");
+                sales = Double.parseDouble(getValueFromNode(receiptElement, "Sales"));
+                items = Integer.parseInt(getValueFromNode(receiptElement, "Items"));
+                companyName = getValueFromNode(receiptElement, "Company");
+                companyCountry = getValueFromNode(receiptElement, "Country");
+                companyCity = getValueFromNode(receiptElement, "City");
+                companyStreet = getValueFromNode(receiptElement, "Street");
+                companyStreetNumber = Integer.parseInt(getValueFromNode(receiptElement, "Number"));
+
+                addReceipt();
             }
 
-        	
-            
-        
-            
         } catch (Exception e) {
-        	JOptionPane.showMessageDialog
-			(null,"xml input");
-		} 
+            JOptionPane.showMessageDialog(null, "xml input");
+        }
     }
-    
+
+    private String getValueFromNode(NodeList nodeList, String tagName) {
+        return ((Element) nodeList.item(0)).getElementsByTagName(tagName)
+                .item(0).getTextContent().trim();
+    }
+
+    private String getValueFromNode(Element element, String tagName) {
+        return element.getElementsByTagName(tagName)
+                .item(0).getTextContent().trim();
+    }
+
+    @Override
+    protected void parseLine(String line) {
+    }
 }
-
-

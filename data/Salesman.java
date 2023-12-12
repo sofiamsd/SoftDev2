@@ -1,8 +1,11 @@
 package data;
 
 import java.util.ArrayList;
-import output.*;
-//import java.util.Vector;
+
+import io.AddReceipt;
+import io.AddReceiptHTML;
+import io.AddReceiptTXT;
+import io.AddReceiptXML;
 
 public class Salesman {
 	private String name;
@@ -64,15 +67,13 @@ public class Salesman {
     public float calculateClothingSales(String clothingType) {
         float salesSum = 0;
         for (Receipt receipt : allReceipts) {
-            if (receipt.kind.getType().equals(clothingType)) {
+            if (receipt.clothingType.getType().equals(clothingType)) {
                 salesSum += receipt.getItems();
             }
         }
         return salesSum;
 
     }
-
-
 
     public float calculateCoatsSales() {
         return calculateClothingSales("Coats");

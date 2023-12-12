@@ -42,7 +42,7 @@ public class SalesmanSelectionWindow extends JDialog {
 
 	
 	private static final long serialVersionUID = 1L;
-	private final JPanel inputWindowPanel = new JPanel();
+	private final JPanel salesmanSelectionWindowPanel = new JPanel();
 	private DefaultListModel <String> listModel = new DefaultListModel <String>();
 	private JList <String> salesmenList = new JList <String>();
 	private ArrayList<Salesman> allSalesmen;
@@ -51,7 +51,7 @@ public class SalesmanSelectionWindow extends JDialog {
 	static SalesmanSelectionWindow dialog = new SalesmanSelectionWindow();
 	@SuppressWarnings("unused")
 	private File inputFile;
-	private String fileTypeFlag;
+	public String fileTypeFlag;
 	/**
 	 * Launch the application.
 	 */
@@ -80,9 +80,9 @@ public class SalesmanSelectionWindow extends JDialog {
 		setBackground(new Color(0, 0, 0));
 	    setBounds(100, 100, 736, 472);
 		getContentPane().setLayout(new BorderLayout());
-		inputWindowPanel.setBackground(new Color(243,225,249)); 
-		inputWindowPanel.setBorder(null);
-		getContentPane().add(inputWindowPanel, BorderLayout.CENTER);
+		salesmanSelectionWindowPanel.setBackground(new Color(238,230,246)); 
+		salesmanSelectionWindowPanel.setBorder(null);
+		getContentPane().add(salesmanSelectionWindowPanel, BorderLayout.CENTER);
 		
 				JButton buttonTXTInput = new JButton("\u0395\u03B9\u03C3\u03B1\u03B3\u03C9\u03B3\u03AE \u03B1\u03C0\u03CC TXT");
 				buttonTXTInput.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -138,39 +138,39 @@ public class SalesmanSelectionWindow extends JDialog {
 				button_1.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 				button_1.setBackground(UIManager.getColor("Button.shadow"));
 				
-				GroupLayout gl_inputWindowPanel = new GroupLayout(inputWindowPanel);
-				gl_inputWindowPanel.setHorizontalGroup(
-					gl_inputWindowPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_inputWindowPanel.createSequentialGroup()
-							.addGroup(gl_inputWindowPanel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_inputWindowPanel.createSequentialGroup()
+				GroupLayout gl_salesmanSelectionWindowPanel = new GroupLayout(salesmanSelectionWindowPanel);
+				gl_salesmanSelectionWindowPanel.setHorizontalGroup(
+					gl_salesmanSelectionWindowPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_salesmanSelectionWindowPanel.createSequentialGroup()
+							.addGroup(gl_salesmanSelectionWindowPanel.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_salesmanSelectionWindowPanel.createSequentialGroup()
 									.addGap(258)
 									.addComponent(button, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_inputWindowPanel.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_salesmanSelectionWindowPanel.createParallelGroup(Alignment.LEADING)
 									.addComponent(label)
 									.addComponent(buttonTXTInput, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 									.addComponent(buttonHTMLInput, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 									.addComponent(buttonXMLInput, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
 							.addGap(18)
-							.addGroup(gl_inputWindowPanel.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_salesmanSelectionWindowPanel.createParallelGroup(Alignment.LEADING)
 								.addComponent(salesmenList, GroupLayout.PREFERRED_SIZE, 309, GroupLayout.PREFERRED_SIZE)
 								.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE))
 							.addContainerGap(57, Short.MAX_VALUE))
-						.addGroup(Alignment.TRAILING, gl_inputWindowPanel.createSequentialGroup()
+						.addGroup(Alignment.TRAILING, gl_salesmanSelectionWindowPanel.createSequentialGroup()
 							.addContainerGap(453, Short.MAX_VALUE)
 							.addComponent(label_1)
 							.addGap(143))
 				);
-				gl_inputWindowPanel.setVerticalGroup(
-					gl_inputWindowPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_inputWindowPanel.createSequentialGroup()
+				gl_salesmanSelectionWindowPanel.setVerticalGroup(
+					gl_salesmanSelectionWindowPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_salesmanSelectionWindowPanel.createSequentialGroup()
 							.addGap(23)
 							.addComponent(label)
 							.addGap(11)
 							.addComponent(label_1)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_inputWindowPanel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_inputWindowPanel.createSequentialGroup()
+							.addGroup(gl_salesmanSelectionWindowPanel.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_salesmanSelectionWindowPanel.createSequentialGroup()
 									.addComponent(buttonTXTInput, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 									.addGap(18)
 									.addComponent(buttonHTMLInput, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
@@ -178,12 +178,12 @@ public class SalesmanSelectionWindow extends JDialog {
 									.addComponent(buttonXMLInput, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
 								.addComponent(salesmenList, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE))
 							.addGap(139)
-							.addGroup(gl_inputWindowPanel.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_salesmanSelectionWindowPanel.createParallelGroup(Alignment.LEADING)
 								.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
 								.addComponent(button, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
 							.addContainerGap(25, Short.MAX_VALUE))
 				);
-				inputWindowPanel.setLayout(gl_inputWindowPanel);
+				salesmanSelectionWindowPanel.setLayout(gl_salesmanSelectionWindowPanel);
 				buttonTXTInput.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						insertFromTXT(evt);
@@ -206,7 +206,7 @@ public class SalesmanSelectionWindow extends JDialog {
 		System.exit(0);	
 	}
 
-	private void insertFromTXT(ActionEvent evt){
+	public void insertFromTXT(ActionEvent evt){
 		JFileChooser TXTFileChooser;
 		TXTFileChooser = new JFileChooser();     
 		TXTFileChooser.setFileSelectionMode(JFileChooser.APPROVE_OPTION);		       
@@ -244,7 +244,7 @@ public class SalesmanSelectionWindow extends JDialog {
              
 	}
 	
-	private void insertFromXML(ActionEvent evt2){
+	public void insertFromXML(ActionEvent evt2){
 		JFileChooser XMLFileChooser;
 		XMLFileChooser = new JFileChooser();     
 		XMLFileChooser.setFileSelectionMode(JFileChooser.APPROVE_OPTION);		       
@@ -265,7 +265,7 @@ public class SalesmanSelectionWindow extends JDialog {
 				}
 			}
 			if(salesmanDuplicate == true){
-				JOptionPane.showMessageDialog(null,"Missing field");
+				JOptionPane.showMessageDialog(null,"Salesman already exists");
 
 			}
 			else{
@@ -281,7 +281,7 @@ public class SalesmanSelectionWindow extends JDialog {
         
              
 	}
-	private void insertFromHTML(ActionEvent evt3){
+	public void insertFromHTML(ActionEvent evt3){
 		JFileChooser HTMLFileChooser;
 		HTMLFileChooser = new JFileChooser();     
 		HTMLFileChooser.setFileSelectionMode(JFileChooser.APPROVE_OPTION);		       
@@ -340,11 +340,11 @@ public class SalesmanSelectionWindow extends JDialog {
 	
 	private void okButtonPressed(ActionEvent evt) {
 		if(salesmenList.isSelectionEmpty()){
-			JOptionPane.showMessageDialog(null,"Error : Salesman list is empty");
+			JOptionPane.showMessageDialog(null,"Please select salesman");
 			
 		}
 		else{
-			SelectionWindow sw = new SelectionWindow(dialog,selectedSalesman,fileTypeFlag);
+			DataSelectionWindow sw = new DataSelectionWindow(dialog,selectedSalesman,fileTypeFlag);
 			this.setVisible(false);
 			sw.setVisible(true);
 		}	
