@@ -23,7 +23,7 @@ public class AddReceiptXML extends AddReceipt {
     }
 
     @Override
-    protected void appendFileSpecific() throws IOException {
+	public void appendFileSpecific() throws IOException {
         try {
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();

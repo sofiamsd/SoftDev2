@@ -22,21 +22,26 @@ public abstract class GenerateReport {
             if (fullPathName != null) {
                 saveReportToFile(fullPathName);
             }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Couldn't generate report file");
-        }
+       
+        } catch (Exception e) {
+
+			e.printStackTrace();
+		}
     }
 
     protected abstract void saveReportToFile(String fullPathName) throws IOException;
 
-    private String getFilePathFromUser() {
+    private String getFilePathFromUser() throws Exception {
         JFileChooser fileChooser = new JFileChooser();
         int userSelection = fileChooser.showSaveDialog(null);
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File fileToSave = fileChooser.getSelectedFile();
+            JOptionPane.showMessageDialog(null, "The file was created successfully ");
             return fileToSave.getAbsolutePath();
-        } else {
-            return null;
+            
+        } else if (userSelection == JFileChooser.CANCEL_OPTION) {
+           JOptionPane.showMessageDialog(null, "Could not create a file");
         }
+		return null;
     }
 }

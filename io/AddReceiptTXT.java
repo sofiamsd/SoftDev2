@@ -12,7 +12,7 @@ public class AddReceiptTXT extends AddReceipt {
     }
 
     @Override
-    protected void appendFileSpecific() throws IOException {
+	public void appendFileSpecific() throws IOException {
         try (FileWriter fileWriter = new FileWriter(fileToAppend, true)) {
             fileWriter.write("\n");
             fileWriter.write("Receipt ID: " + receiptData.getReceiptId() + "\n");

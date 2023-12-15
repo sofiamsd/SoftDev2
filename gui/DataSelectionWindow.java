@@ -406,7 +406,7 @@ public class DataSelectionWindow extends JDialog {
 	    trousersSales = isSelected(trousersRadio) ? selectedSalesman.calculateTrouserSales() : -1;
 	    commission = isSelected(commissionCheckBox) ? selectedSalesman.calculateCommission() : -1;
 
-	    SalesDataExport rs = new SalesDataExport(
+	    SalesDataExportWindow rs = new SalesDataExportWindow(
 	        this, selectedSalesman, totalSales, totalItems, shirtSales, skirtSales, trousersSales, coatsSales, commission
 	    );
 
@@ -419,6 +419,10 @@ public class DataSelectionWindow extends JDialog {
 	    return button.isSelected();
 	}
 
+	/*
+	 * When user presses the button make sure that the receipt has the correct date
+	 * format, gets one of the predetermined clothing types and has no empty fields
+	 */
 	private void addReceiptButtonPressed(ActionEvent evt) {
 	    if (anyFieldNotEmpty()) {
 	        if (isReceiptIdAlreadyExists()) {

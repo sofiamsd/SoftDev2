@@ -29,40 +29,9 @@ public class HTMLInput extends Input {
             e.printStackTrace();
         }
     }
-
-    @Override
     protected void parseLine(String line) {
-        if (line.contains("Name")) {
-            name = getValueFromLine(line);
-            addSalesman();
-        } else if (line.contains("AFM")) {
-            afm = getValueFromLine(line);
-            addSalesman();
-        } else if (line.contains("Receipt ID")) {
-            receiptID = Integer.parseInt(getValueFromLine(line));
-        } else if (line.contains("Date")) {
-            date = getValueFromLine(line);
-        } else if (line.contains("Kind")) {
-            clothingType = getValueFromLine(line);
-        } else if (line.contains("Sales")) {
-            sales = Double.parseDouble(getValueFromLine(line));
-        } else if (line.contains("Items")) {
-            items = Integer.parseInt(getValueFromLine(line));
-        } else if (line.contains("Company")) {
-            companyName = getValueFromLine(line);
-        } else if (line.contains("Country")) {
-            companyCountry = getValueFromLine(line);
-        } else if (line.contains("City")) {
-            companyCity = getValueFromLine(line);
-        } else if (line.contains("Street")) {
-            companyStreet = getValueFromLine(line);
-        } else if (line.contains("Number")) {
-            companyStreetNumber = Integer.parseInt(getValueFromLine(line));
-            addReceipt();
-        }
+        processCommonLines(line);
     }
 
-    private String getValueFromLine(String line) {
-        return line.substring(line.indexOf(":") + 1).trim();
-    }
+
 }

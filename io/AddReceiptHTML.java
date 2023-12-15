@@ -12,7 +12,7 @@ public class AddReceiptHTML extends AddReceipt {
     }
 
     @Override
-    protected void appendFileSpecific() throws IOException {
+	public void appendFileSpecific() throws IOException {
         try (FileWriter fileWriter = new FileWriter(fileToAppend, true)) {
             fileWriter.write("<div class=\"receipt\">\n");
             fileWriter.write("  <p><strong>Receipt ID:</strong> " + receiptData.getReceiptId() + "</p>\n");

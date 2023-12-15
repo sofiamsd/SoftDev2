@@ -50,7 +50,7 @@ public class XMLInput extends Input {
             }
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "xml input");
+            JOptionPane.showMessageDialog(null, "Error while reading XML file");
         }
     }
 
